@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'test'
+app.config['MYSQL_DB'] = 'flaskmysql'
 
 #init mysql
 mysql = MySQL(app)
@@ -29,7 +29,7 @@ def index():
     #tutup kursor
     cursor.close()
 
-    return render_template('index.html', users=data)
+    return render_template('data.html', users=data)
 
 if __name__ == "__main__":
     app.run(debug=True)
