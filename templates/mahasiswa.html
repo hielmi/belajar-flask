@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        table, tr, td, th{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome...</h1>
+    <a href="{{ url_for('insert_or_update_mahasiswa')}}">Tambahkan mahasiswa</a>
+    <table>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>NPM</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Prodi</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>
+                        <a href="{{ url_for('insert_or_update_mahasiswa', id=row[0]) }}">Edit</a>
+                        <a href="{{ url_for('delete_mahasiswa', id=row[0]) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</body>
+</html>
