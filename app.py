@@ -36,10 +36,8 @@ def login():
             session['is_logged_in'] = True
             session['username'] = result[1]
 
-            print('password benar')
             return redirect(url_for('home'))
         else:
-            print('password salah')
             return render_template('login.html')
     
     return render_template('login.html')
