@@ -1,4 +1,48 @@
-<!DOCTYPE html>
+{% extends 'layout.html' %} {% block head %}
+<title>Form Mahasiswa</title>
+
+{% endblock %} {% block body %}
+<h1>Welcome...</h1>
+<div class="d-flex justify-content-end mt-3">
+    <a href="{{ url_for('insert_or_update_mahasiswa')}}"
+  class="btn btn-primary">Tambahkan mahasiswa</a
+>
+<a href="{{ url_for('logout')}}" class="btn btn-danger ms-2">Logout</a>
+</div>
+<h2>Tabel Mahasiswa</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>NPM</th>
+      <th>Jenis Kelamin</th>
+      <th>Prodi</th>
+      <th>Alamat</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+    <tr>
+      <th scope="row">{{ loop.index }}</th>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+      <td>{{ row[5] }}</td>
+      <td>
+        <a href="{{ url_for('insert_or_update_mahasiswa', id=row[0]) }}"
+          class="btn btn-warning">Edit</a
+        >
+        <a href="{{ url_for('delete_mahasiswa', id=row[0]) }}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -47,4 +91,4 @@
             </tbody>
         </table>
 </body>
-</html>
+</html> -->

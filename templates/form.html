@@ -1,37 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Form Mahasiswa</title>
-</head>
-<body>
-    <h1>Form Mahasiswa</h1>
-    <form method="POST" action="">
-        <!-- Jika id sudah ada, ini adalah formulir pembaruan -->
-        <input type="hidden" name="id" value="{{ data[0] if data else '' }}">
-        <label for="nama">Nama:</label> <br>
-        <input type="text" name="nama" value="{{ data[1] if data else '' }}" required><br><br>
-      
-        <label for="npm">NPM:</label><br>
-        <input type="number" name="npm" value="{{ data[2] if data else '' }}" required><br><br>
+{% extends 'layout.html' %} {% block head %}
+<title>Form Mahasiswa</title>
 
-        <label for="jenis_kelamin">Jenis Kelamin:</label><br>
-        <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Laki-laki" {% if data[3] == "Laki-laki" %} checked {% endif %}> Laki-laki <br>
-        <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Perempuan" {% if data[3] == "Perempuan" %} checked {% endif %}> Perempuan <br><br>
-        
+{% endblock %} {% block body %}
+<h1>Form Mahasiswa</h1>
+<form action="" method="post">
+    <div class="bg-danger w-50 p-2">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Nama Mahasiswa :</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jhondoe"
+                name="nama"  value="{{ data[1] if data else '' }}" />
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">NPM</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="12312313" name="npm" value="{{ data[2] if data else '' }}" />
 
-        <label for="prodi">Program Studi:</label><br>
-        <select name="prodi">
+            <!-- input for j kelamin -->
+
+            <div class="form-check mt-2">
+                <input class="form-check-input" name="jenis_kelamin" type="radio" name="flexRadioDefault" id="flexRadioDefault1" 
+                {% if data[3]== "Laki-laki" %} checked {% endif %} value="Laki-laki">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Laki-laki
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" name="jenis_kelamin" type="radio" name="flexRadioDefault" id="flexRadioDefault2" 
+                {% if data[3]== "Laki-laki" %} checked {% endif %} value="Perempuan">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Perempuan
+                </label>
+            </div>
+        </div>
+
+        <!-- input for prodi -->
+        <select class="form-select mt-2" aria-label="Default select example" name="prodi">
+            <option>Program Studi: </option>
             {% for option in option %}
-                <option value="{{ option }}" {% if option == default_value %} selected {% endif %}>{{ option }}</option>
+            <option value="{{ option }}" {% if option==default_value %} selected {% endif %}>{{ option }}</option>
             {% endfor %}
-        </select><br><br>
+        </select>
 
-        <label for="alamat">Alamat:</label><br>
-        <textarea type="text" name="alamat"  required>{{ data[5] if data else '' }}</textarea><br><br>
-
-        <input type="submit" value="Simpan Mahasiswa"><br><br>
+        <!-- input for alamat -->
+        <div class="form-floating mt-2">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                style="height: 100px" name="alamat">{{ data[5] if data else '' }}</textarea>
+            <label for="floatingTextarea2">Alamat</label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
     </form>
-
-    <a href="{{ url_for('index') }}">Kembali ke Daftar Mahasiswa</a>
-</body>
-</html>
+</div>
+{% endblock %}
